@@ -16,6 +16,7 @@ import { Empty } from "@/components/empty";
 import { Button } from "@/components/ui/button";
 
 import { formSchema } from "./constants";
+import { Loader } from "@/components/loader";
 
 const ConversationPage = () => {
     const router = useRouter();
@@ -82,7 +83,7 @@ const ConversationPage = () => {
                 <div className="space-y-4 mt-4">
                     {isLoading && (
                         <div className="p-8 rounded-lg w-full flex items-center justify-center bg-muted">
-                            {/* <Loader/> */}
+                            <Loader/>
                         </div>
                     )}
                     {messages.length === 0 && !isLoading && (
