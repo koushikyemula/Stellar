@@ -1,5 +1,5 @@
 import NavBar from "@/components/navbar";
-import SideBar from "@/components/ui/sidebar";
+import SideBar from "@/components/sidebar";
 
 const DashboardLayout = ({
     children

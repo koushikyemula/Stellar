@@ -1,7 +1,7 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
-import { MessageSquare, ArrowRight, Music, ImageIcon, VideoIcon, Code } from "lucide-react";
+import { MessageSquare, ArrowRight, Music, ImageIcon, VideoIcon, Code2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
@@ -37,10 +37,10 @@ const tools = [
   },
   {
     label: "Code Generation",
-    icon: Code,
+    icon: Code2,
     color: "text-green-700",
     bgColor: "bg-green-700/10",
-    href: "/conversation"
+    href: "/code"
   },
 ]
 

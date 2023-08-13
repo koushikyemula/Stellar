@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useEffect, useState } from "react";
 
-import SideBar from "@/components/ui/sidebar";
+import SideBar from "@/components/sidebar";
 
 const MobileSidebar = () => {
     const [isMounted, setIsMounted] = useState(false)
