@@ -21,7 +21,7 @@ export async function POST(
         }
 
         if(!configuration.apiKey){
-            return new NextResponse("OpenAI API key not configured", { status: 500 });
+            return new NextResponse("OpenAI API key not configured", { status: 500 })
         }
 
         if(!messages){
