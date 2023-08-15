@@ -14,11 +14,10 @@ import { Input } from "@/components/ui/input";
 import { Empty } from "@/components/empty";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/loader";
-import { BotAvatar } from "@/components/bot-avatar";
-import { UserAvatar } from "@/components/user-avatar";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 
-import { formSchema } from "./constants";
+import { amountOptions, formSchema } from "./constants";
 
 const ConversationPage = () => {
     const router = useRouter();
@@ -37,11 +36,14 @@ const ConversationPage = () => {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-
-            const response = await axios.post("/api/conversation");
-             
+            setImages([]);
+            const response = await axios.post("/api/image", values);
             
-             form.reset();
+            const urls = response.data.map((image: {url: string}) => image.url);
+
+            setImages(urls)
+
+            form.reset();
         } catch (error: any) {
             //TODO: Open Pro Model
             console.log(error);
@@ -61,14 +63,35 @@ const ConversationPage = () => {
                         w-full p-4 px-3 md:px-6 focus-within:shadow-sm grid grid-cols-12 gap-2">
                             <FormField
                             name="prompt" render={({field}) => (
-                                <FormItem className="col-span-12 lg:col-span-10">
+                                <FormItem className="col-span-12 lg:col-span-6">
                                     <FormControl className="m-0 p-0">
                                         <Input className="border-0 outline-none focus-visible:ring-0
                                          focus-visible:ring-transparent"
                                          disabled={isLoading}
-                                         placeholder="Spongebob eating at a restaurant"
+                                         placeholder="Spongebob riding a horse"
                                          {...field}/>
                                     </FormControl>
+                                </FormItem>
+                            )}/>
+                            <FormField
+                            control={form.control}
+                            name="amount"
+                            render={({field}) => (
+                                <FormItem className="col-span-12 lg:col-span-2">
+                                    <Select disabled={isLoading} onValueChange={field.onChange} value={field.value} defaultValue={field.value}>
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue defaultValue={field.value}/>
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            {amountOptions.map((option) => (
+                                                <SelectItem key={option.value} value={option.value}>
+                                                    {option.label}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
                                 </FormItem>
                             )}/>
                             <Button className="col-span-12 lg:col-span-2 w-full" disabled={isLoading}>
