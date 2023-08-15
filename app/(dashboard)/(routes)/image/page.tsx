@@ -2,10 +2,11 @@
 
 import axios from "axios";
 import * as z from "zod";
-import { ImageIcon } from "lucide-react";
+import { Download, ImageIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { useState } from "react";
 
 import { Heading } from "@/components/heading";
@@ -14,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Empty } from "@/components/empty";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/loader";
+import { Card, CardFooter } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 
@@ -130,8 +132,20 @@ const ConversationPage = () => {
                     {images.length === 0 && !isLoading && (
                         <Empty label="No Images generated."/>
                     ) }
-                    <div>
-                        Images
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-8">
+                        {images.map((src) => (
+                            <Card key={src} className="rounded-lg overflow-hidden">
+                                <div className="relative aspect-square">
+                                    <Image alt="image" fill src={src} />
+                                </div>
+                                <CardFooter className="p-2">
+                                    <Button onClick={() => window.open(src)} variant="secondary" className="w-full">
+                                        <Download className="h-4 w-4 mr-2"/>
+                                        Download
+                                    </Button>
+                                </CardFooter>
+                            </Card>
+                        ) )}
                     </div>
                 </div>
             </div>
