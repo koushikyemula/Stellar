@@ -17,7 +17,7 @@ import { Loader } from "@/components/loader";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 
-import { amountOptions, formSchema } from "./constants";
+import { amountOptions, formSchema, resolutionOptions } from "./constants";
 
 const ConversationPage = () => {
     const router = useRouter();
@@ -86,6 +86,27 @@ const ConversationPage = () => {
                                         </FormControl>
                                         <SelectContent>
                                             {amountOptions.map((option) => (
+                                                <SelectItem key={option.value} value={option.value}>
+                                                    {option.label}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                </FormItem>
+                            )}/>
+                            <FormField
+                            control={form.control}
+                            name="resolution"
+                            render={({field}) => (
+                                <FormItem className="col-span-12 lg:col-span-2">
+                                    <Select disabled={isLoading} onValueChange={field.onChange} value={field.value} defaultValue={field.value}>
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue defaultValue={field.value}/>
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            {resolutionOptions.map((option) => (
                                                 <SelectItem key={option.value} value={option.value}>
                                                     {option.label}
                                                 </SelectItem>
