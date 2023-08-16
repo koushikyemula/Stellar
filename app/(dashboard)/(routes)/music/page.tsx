@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import * as z from "zod";
-import { MessageSquare } from "lucide-react";
+import { Music } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation";
@@ -42,7 +42,7 @@ const ConversationPage = () => {
             }
             const newMessages = [...messages, userMessage];
 
-            const response = await axios.post("/api/conversation", {
+            const response = await axios.post("/api/music", {
                 messages: newMessages,
             });
              setMessages((current) => [...current, userMessage, response.data]);
@@ -58,8 +58,8 @@ const ConversationPage = () => {
 
     return ( 
         <div>
-            <Heading title="Conversation" description="Our most advanced conversation model" 
-            icon={MessageSquare} iconColor="text-violet-500" bgColor="bg-violet-500/10"/>
+            <Heading title="Music Generation" description="Turn your prompt into music" 
+            icon={Music} iconColor="text-emerald-500" bgColor="bg-emerald-500/10"/>
             <div className="px-4 lg:px-8">
                 <div>
                     <Form {...form}>
@@ -72,7 +72,7 @@ const ConversationPage = () => {
                                         <Input className="border-0 outline-none focus-visible:ring-0
                                          focus-visible:ring-transparent"
                                          disabled={isLoading}
-                                         placeholder="Most asked react interview questions"
+                                         placeholder="Piano solo"
                                          {...field}/>
                                     </FormControl>
                                 </FormItem>
