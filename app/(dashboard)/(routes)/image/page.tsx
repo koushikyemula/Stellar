@@ -150,7 +150,7 @@ const ConversationPage = () => {
                 </div>
             </div>
         </div>
-     );
+    );
 }
  
 export default ConversationPage;

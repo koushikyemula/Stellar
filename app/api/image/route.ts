@@ -17,7 +17,7 @@ export async function POST(
         const { prompt, amount = 1, resolution = "512x512" } = body;
 
         if(!userId){
-            return new NextResponse("UnAuthorised", { status: 401 });
+            return new NextResponse("Unauthorised", { status: 401 });
         }
 
         if(!configuration.apiKey){

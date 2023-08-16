@@ -22,7 +22,7 @@ export async function POST(
         const { messages } = body;
 
         if(!userId){
-            return new NextResponse("UnAuthorised", { status: 401 });
+            return new NextResponse("Unauthorised", { status: 401 });
         }
 
         if(!configuration.apiKey){

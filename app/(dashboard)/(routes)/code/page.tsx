@@ -116,7 +116,7 @@ const CodePage = () => {
                 </div>
             </div>
         </div>
-     );
+    );
 }
  
 export default CodePage;
