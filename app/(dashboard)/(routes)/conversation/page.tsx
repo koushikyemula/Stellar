@@ -58,7 +58,7 @@ const ConversationPage = () => {
 
     return ( 
         <div>
-            <Heading title="Conversation" description="Our most advanced conversation model" 
+            <Heading title="Conversation" description="Our most advanced conversation model." 
             icon={MessageSquare} iconColor="text-violet-500" bgColor="bg-violet-500/10"/>
             <div className="px-4 lg:px-8">
                 <div>
@@ -91,7 +91,7 @@ const ConversationPage = () => {
                     )}
                     {messages.length === 0 && !isLoading && (
                         <Empty label="No conversation started."/>
-                    ) }
+                    )}
                     <div className="flex flex-col-reverse gap-y-4">
                         {messages.map((message) => (
                             <div key={message.content} className={cn("p-8 w-full flex items-start gap-x-8 rounded-lg",

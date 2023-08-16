@@ -15,15 +15,12 @@ import { Input } from "@/components/ui/input";
 import { Empty } from "@/components/empty";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/loader";
-import { BotAvatar } from "@/components/bot-avatar";
-import { UserAvatar } from "@/components/user-avatar";
-import { cn } from "@/lib/utils";
 
 import { formSchema } from "./constants";
 
-const ConversationPage = () => {
+const MusicPage = () => {
     const router = useRouter();
-    const [messages, setMessages]= useState<ChatCompletionRequestMessage[]>([]);
+    const [music, setMusic]= useState<string>();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -36,18 +33,12 @@ const ConversationPage = () => {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            const userMessage: ChatCompletionRequestMessage = {
-                role: "user",
-                content: values.prompt,
-            }
-            const newMessages = [...messages, userMessage];
+            setMusic(undefined);
 
-            const response = await axios.post("/api/music", {
-                messages: newMessages,
-            });
-             setMessages((current) => [...current, userMessage, response.data]);
-            
-             form.reset();
+            const response = await axios.post("/api/music", values);
+             
+            setMusic(response.data.audio)
+            form.reset();
         } catch (error: any) {
             //TODO: Open Pro Model
             console.log(error);
@@ -58,7 +49,7 @@ const ConversationPage = () => {
 
     return ( 
         <div>
-            <Heading title="Music Generation" description="Turn your prompt into music" 
+            <Heading title="Music Generation" description="Turn your prompt into music." 
             icon={Music} iconColor="text-emerald-500" bgColor="bg-emerald-500/10"/>
             <div className="px-4 lg:px-8">
                 <div>
@@ -89,19 +80,11 @@ const ConversationPage = () => {
                             <Loader/>
                         </div>
                     )}
-                    {messages.length === 0 && !isLoading && (
-                        <Empty label="No conversation started."/>
-                    ) }
-                    <div className="flex flex-col-reverse gap-y-4">
-                        {messages.map((message) => (
-                            <div key={message.content} className={cn("p-8 w-full flex items-start gap-x-8 rounded-lg",
-                            message.role === "user" ? "bg-white border border-black/10" : "bg-muted")}>
-                                {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
-                                <p className="text-sm">
-                                    {message.content}
-                                </p>
-                            </div>
-                        ))}
+                    {!music && !isLoading && (
+                        <Empty label="No music generated."/>
+                    )}
+                    <div>
+                        messages will be displayed here
                     </div>
                 </div>
             </div>
@@ -109,4 +92,4 @@ const ConversationPage = () => {
      );
 }
  
-export default ConversationPage;
+export default MusicPage;
