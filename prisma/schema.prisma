@@ -10,3 +10,11 @@ datasource db {
 model Widget {
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 }
+
+model UserApiLimit {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  count     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
