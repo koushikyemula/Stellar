@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { MAX_FREE_COUNTS } from "@/constants";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
+import { useProModel } from "@/hooks/use-pro-modal";
 
 interface FreeCouterProps {
     apiLimitCount: number;
@@ -15,6 +16,7 @@ interface FreeCouterProps {
 export const FreeCouter = ({
     apiLimitCount = 0
 }: FreeCouterProps) => {
+    const proModal = useProModel();
     const [mounted, setMounted] = useState(false); 
 
     useEffect(() => {
@@ -36,7 +38,7 @@ export const FreeCouter = ({
                         <Progress className="h-3"
                         value={(apiLimitCount / MAX_FREE_COUNTS) * 100}/>
                     </div>
-                    <Button className="w-full" variant="premium">
+                    <Button onClick={proModal.onOpen} className="w-full" variant="premium">
                         Upgrade
                         <Zap className="w-4 h-4 ml-2 fill-white"/>
                     </Button>
