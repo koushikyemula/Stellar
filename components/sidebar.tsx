@@ -7,6 +7,7 @@ import { Code2, ImageIcon, LayoutDashboard, MessageSquare, Music, Settings, Vide
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
+import { FreeCouter } from "@/components/free-counter";
 
 const montserrat = Montserrat({
     weight: "600",
@@ -57,7 +58,13 @@ const routes = [
     },
 ]
 
-const SideBar = () => {
+interface SideBarProps {
+    apiLimitCount: number;
+}
+
+const SideBar = ({
+    apiLimitCount = 0
+}: SideBarProps) => {
     const pathname = usePathname();
     return ( 
         <div className="space-y-4 py-4 flex flex-col h-full bg-[#111827] text-white">
@@ -82,6 +89,7 @@ const SideBar = () => {
                     ))}
                 </div>
             </div>
+            <FreeCouter apiLimitCount= {apiLimitCount}/>
         </div>
      );
 }
