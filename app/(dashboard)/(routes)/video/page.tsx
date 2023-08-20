@@ -14,11 +14,13 @@ import { Input } from "@/components/ui/input";
 import { Empty } from "@/components/empty";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/loader";
+import { useProModel } from "@/hooks/use-pro-modal";
 
 import { formSchema } from "./constants";
 
 const VideoPage = () => {
     const router = useRouter();
+    const proModal = useProModel();
     const [video, setVideo]= useState<string>();
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -39,8 +41,9 @@ const VideoPage = () => {
             setVideo(response.data[0])
             form.reset();
         } catch (error: any) {
-            //TODO: Open Pro Model
-            console.log(error);
+            if(error?.response?.status === 403) {
+                proModal.onOpen();
+            }
         } finally {
             router.refresh();
         }

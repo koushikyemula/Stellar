@@ -19,11 +19,13 @@ import { Loader } from "@/components/loader";
 import { BotAvatar } from "@/components/bot-avatar";
 import { UserAvatar } from "@/components/user-avatar";
 import { cn } from "@/lib/utils";
+import { useProModel } from "@/hooks/use-pro-modal";
 
 import { formSchema } from "./constants";
 
 const CodePage = () => {
     const router = useRouter();
+    const proModal = useProModel();
     const [messages, setMessages]= useState<ChatCompletionRequestMessage[]>([]);
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -50,8 +52,9 @@ const CodePage = () => {
             
              form.reset();
         } catch (error: any) {
-            //TODO: Open Pro Model
-            console.log(error);
+            if(error?.response?.status === 403) {
+                proModal.onOpen();
+            }
         } finally {
             router.refresh();
         }
