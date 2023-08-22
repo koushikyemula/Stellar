@@ -11,10 +11,12 @@ import { useProModel } from "@/hooks/use-pro-modal";
 
 interface FreeCouterProps {
     apiLimitCount: number;
+    isPro: boolean,
 }
 
 export const FreeCouter = ({
-    apiLimitCount = 0
+    apiLimitCount = 0,
+    isPro = false,
 }: FreeCouterProps) => {
     const proModal = useProModel();
     const [mounted, setMounted] = useState(false); 
@@ -24,7 +26,11 @@ export const FreeCouter = ({
     }, [])
 
     if(!mounted) {
-        return null
+        return null;
+    }
+
+    if(isPro) {
+      return null;
     }
 
     return (
