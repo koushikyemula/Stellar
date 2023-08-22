@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ChatCompletionRequestMessage } from "openai";
+import toast from "react-hot-toast";
 import ReactMarkDown from "react-markdown";
 
 import { Heading } from "@/components/heading";
@@ -54,6 +55,8 @@ const CodePage = () => {
         } catch (error: any) {
             if(error?.response?.status === 403) {
                 proModal.onOpen();
+            } else {
+              toast.error("Something went wrong");
             }
         } finally {
             router.refresh();
