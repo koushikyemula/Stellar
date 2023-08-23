@@ -91,8 +91,3 @@ Before you begin, ensure you have the following prerequisites:
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-```
-
-Feel free to customize this template to fit your project's specifics. Add more sections, elaborate on features, or provide additional details as needed to accurately represent your SAAS application.
-```
