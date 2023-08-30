@@ -7,11 +7,11 @@ import { ToasterProvider } from '@/components/toaster-provider'
 import { CrispProvider } from '@/components/crisp-provider'
 import '@/app/globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const font = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Stellar',
-  description: 'AI Platform',
+  description: 'An AI Tool for Chatbot, Image generation, Video generation, Code generation, Music generation',
 }
 
 export default function RootLayout({
@@ -23,7 +23,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <CrispProvider />
-        <body className={inter.className}>
+        <body className={font.className}>
           <ToasterProvider />
           <ModalProvider />
           {children}
