@@ -10,26 +10,22 @@ import "@/app/globals.css";
 const font = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "Stellar",
-	description:
-		"An AI Tool for Chatbot, Image generation, Video generation, Code generation, Music generation",
+  title: "Stellar",
+  description:
+    "An AI Tool for Chatbot, Image generation, Video generation, Code generation, Music generation",
 };
 
-export default function RootLayout({
-	children,
-}: {
-	children: React.ReactNode;
-}) {
-	return (
-		<ClerkProvider>
-			<html lang="en">
-				<CrispProvider />
-				<body className={font.className}>
-					<ToasterProvider />
-					<ModalProvider />
-					{children}
-				</body>
-			</html>
-		</ClerkProvider>
-	);
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <ClerkProvider>
+      <html lang="en">
+        <CrispProvider />
+        <body className={font.className}>
+          <ToasterProvider />
+          <ModalProvider />
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
+  );
 }
