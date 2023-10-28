@@ -1,4 +1,3 @@
-````markdown
 # Stellar
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -62,7 +61,6 @@ Before you begin, ensure you have the following prerequisites:
    ```bash
    git clone https://github.com/BlitZSenpai/Stellar.git
    ```
-````
 
 2. Navigate to the project directory:
    ```bash
